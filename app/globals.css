@@ -74,9 +74,16 @@ p { color: var(--body); }
 .proof-inner { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: center; }
 .proof-inner .eyebrow { margin-bottom: 4px; }
 .proof-inner p:last-child { margin-bottom: 0; font-size: .88rem; }
-.client-logos { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; align-items: center; }
-.client-logos figure { height: 76px; padding: 10px 14px; display: flex; align-items: center; justify-content: center; border: 1px solid #ece9e1; border-radius: 7px; background: white; }
+.client-logos { overflow: hidden; }
+.client-logo-track { display: flex; width: 200%; animation: client-logos-left-to-right 20s linear infinite; will-change: transform; }
+.client-logo-set { flex: 0 0 50%; display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; align-items: center; padding-inline: 9px; }
+.client-logo-set figure { height: 76px; padding: 10px 14px; display: flex; align-items: center; justify-content: center; border: 1px solid #ece9e1; border-radius: 7px; background: white; }
 .client-logos img { max-width: 100%; max-height: 54px; width: auto; height: auto; object-fit: contain; }
+
+@keyframes client-logos-left-to-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
 
 .two-column-intro { display: grid; grid-template-columns: 1fr .9fr; gap: clamp(60px, 9vw, 130px); }
 .two-column-intro > div:last-child { padding-top: 34px; }
@@ -256,7 +263,8 @@ p { color: var(--body); }
   .capability-strip { width: 100%; grid-template-columns: 1fr; }
   .capability-strip span { padding: 16px 24px; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.1); }
   .proof-inner, .two-column-intro, .evidence-grid, .faq-grid, .cta-grid { grid-template-columns: 1fr; gap: 35px; }
-  .client-logos { grid-template-columns: repeat(2,1fr); margin-top: 6px; }
+  .client-logos { margin-top: 6px; }
+  .client-logo-track { width: 400%; }
   .two-column-intro > div:last-child { padding-top: 0; }
   .discipline-grid, .services-grid, .contrast-grid, .experience-grid, .why-grid, .audience-grid { grid-template-columns: 1fr; }
   .discipline-grid article { border-right: 0; border-bottom: 1px solid var(--border); }
@@ -291,4 +299,5 @@ p { color: var(--body); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  .client-logo-track { animation: none; transform: none; }
 }

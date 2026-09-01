@@ -69,6 +69,13 @@ const commercialExperience = [
   'Market Entry', 'GTM Strategy', 'Demand Generation', 'Account-Based Selling', 'Enterprise Sales', 'Solution Selling', 'Business Development', 'Partnerships', 'RFP & Proposal Management', 'Commercial Negotiation', 'Customer Success', 'Account Expansion',
 ];
 
+const clientLogos = [
+  ['/assets/clients/infocodec.png', 2560, 459, 'Infocodec'],
+  ['/assets/clients/mapletax-solutions.jpg', 309, 309, 'Mapletax Solutions'],
+  ['/assets/clients/icl-lims.jpg', 386, 181, 'ICL LIMS'],
+  ['/assets/clients/kidoye.jpg', 222, 100, 'KidOye'],
+] as const;
+
 const faqs = [
   ['Do you only provide lead generation?', 'No. Prospecting and demand generation can form part of an engagement, but SalesNego is designed around a broader commercial lifecycle that includes GTM strategy, Revenue Operations, discovery, qualification, sales execution, closing and account growth.'],
   ['What types of companies do you work with?', 'Our primary focus is B2B SaaS, AI and technology product companies. We selectively work with differentiated technology services companies where the commercial problem requires consultative selling.'],
@@ -114,7 +121,7 @@ export default function Home() {
         <div className="section-shell capability-strip" aria-label="SalesNego capabilities"><span>GTM Strategy &amp; Market Intelligence</span><span>Revenue Operations &amp; AI-Accelerated Sales</span><span>End-to-End Commercial Execution</span></div>
       </section>
 
-      <section className="proof-strip" aria-label="Trusted clients"><div className="section-shell proof-inner"><div><p className="eyebrow">TRUSTED CLIENTS</p><p>Commercial experience across SaaS, enterprise technology, digital products and technology services.</p></div><div className="client-logos"><figure><img src="/assets/clients/infocodec.png" width="2560" height="459" alt="Infocodec" loading="lazy" decoding="async" /></figure><figure><img src="/assets/clients/mapletax-solutions.jpg" width="309" height="309" alt="Mapletax Solutions" loading="lazy" decoding="async" /></figure><figure><img src="/assets/clients/icl-lims.jpg" width="386" height="181" alt="ICL LIMS" loading="lazy" decoding="async" /></figure><figure><img src="/assets/clients/kidoye.jpg" width="222" height="100" alt="KidOye" loading="lazy" decoding="async" /></figure></div></div></section>
+      <section className="proof-strip" aria-label="Trusted clients"><div className="section-shell proof-inner"><div><p className="eyebrow">TRUSTED CLIENTS</p><p>Commercial experience across SaaS, enterprise technology, digital products and technology services.</p></div><div className="client-logos"><div className="client-logo-track">{[false, true].map((duplicate) => <div className="client-logo-set" aria-hidden={duplicate || undefined} key={String(duplicate)}>{clientLogos.map(([src, width, height, alt]) => <figure key={`${duplicate}-${src}`}><img src={src} width={width} height={height} alt={duplicate ? '' : alt} loading="lazy" decoding="async" /></figure>)}</div>)}</div></div></div></section>
 
       <section className="section why-intro" id="what-we-do">
         <div className="section-shell two-column-intro"><div><p className="eyebrow">WHY SALESNEGO</p><h2>Most revenue problems start before the first sales call.</h2></div><div><p>A strong product does not automatically create a strong commercial motion. Companies often enter the market with an unclear ICP, generic positioning, random account selection, fragmented sales tools, weak qualification and limited visibility into how buyers actually make decisions.</p><p>The result is activity without enough commercial progress.</p></div></div>
