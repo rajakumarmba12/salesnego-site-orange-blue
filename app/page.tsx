@@ -52,11 +52,21 @@ const systemSteps = [
   ['08', 'EXPAND', 'Support adoption, identify legitimate adjacent problems, retain and grow the account.'],
 ];
 
-const experience = [
-  ['Laboratory & Testing Technology', 'Commercial experience around LIMS, scientific software and specialist laboratory technology.'],
-  ['Insurance & Enterprise Technology', 'Commercial experience involving specialist technology resources, enterprise account development and long-term customer relationships.'],
-  ['Enterprise Applications & Energy Trading', 'Experience around complex enterprise application requirements, ETRM/OpenLink environments and technical alignment.'],
-  ['AI & Digital Products', 'Experience supporting AI-enabled products, digital platforms, custom software and technical solution selling.'],
+const industryExperience = [
+  ['01', 'SaaS & Enterprise Software', 'B2B software, enterprise applications and specialized technology platforms.'],
+  ['02', 'AI & Digital Products', 'AI-enabled solutions, digital platforms and custom technology products.'],
+  ['03', 'Laboratory, Testing & Quality', 'LIMS, laboratory digitization, testing workflows, quality systems and compliance-oriented technology.'],
+  ['04', 'Insurance & InsurTech', 'Insurance technology, enterprise platforms, specialist technology requirements and digital transformation.'],
+  ['05', 'Energy & Industrial Technology', 'Enterprise applications supporting energy trading, operational workflows and specialized business processes.'],
+  ['06', 'Manufacturing & FMCG Technology', 'Quality, batch traceability, operational digitization and business process technology.'],
+];
+
+const technologyExperience = [
+  'B2B SaaS', 'AI Solutions', 'Custom Software Development', 'Enterprise Applications', 'LIMS', 'InsurTech', 'ETRM / OpenLink', 'Low-Code Solutions', 'Web & Mobile Applications', 'API & Systems Integration', 'IT Services', 'Technology Consulting', 'IT Staff Augmentation', 'Specialist Technology Resources',
+];
+
+const commercialExperience = [
+  'Market Entry', 'GTM Strategy', 'Demand Generation', 'Account-Based Selling', 'Enterprise Sales', 'Solution Selling', 'Business Development', 'Partnerships', 'RFP & Proposal Management', 'Commercial Negotiation', 'Customer Success', 'Account Expansion',
 ];
 
 const faqs = [
@@ -136,7 +146,7 @@ export default function Home() {
 
       <section className="section ai-section"><div className="section-shell section-heading centered"><p className="eyebrow">AI IN THE COMMERCIAL SYSTEM</p><h2>Automate the workload. Keep commercial judgment human.</h2><p>AI can materially increase the speed of sales execution. It should not replace the judgment required to select markets, understand customers or negotiate complex decisions.</p></div><div className="section-shell contrast-grid"><article><p className="eyebrow">AI &amp; AUTOMATION SUPPORT</p><ul>{['Company and market research','Account enrichment','Trigger monitoring','Personalization preparation','Meeting summaries','CRM data capture','Pipeline alerts'].map((item) => <li key={item}>{item}</li>)}</ul></article><article><p className="eyebrow">HUMAN COMMERCIAL JUDGMENT</p><ul>{['Market selection','Account prioritization','Executive messaging','Discovery','Business-case development','Solution alignment','Negotiation and closure'].map((item) => <li key={item}>{item}</li>)}</ul></article></div></section>
 
-      <section className="section dark-section" id="experience"><div className="section-shell section-heading"><p className="eyebrow light">RELEVANT EXPERIENCE</p><h2>Built around complex B2B technology sales.</h2><p>Commercial experience behind the SalesNego operating model.</p></div><div className="section-shell experience-grid">{experience.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
+      <section className="section dark-section" id="experience"><div className="section-shell section-heading experience-heading"><p className="eyebrow light">INDUSTRY &amp; TECHNOLOGY EXPERIENCE</p><h2>Commercial Experience Across B2B Technology Markets</h2><p>SalesNego brings commercial experience across SaaS, enterprise technology and specialist industry solutions where selling requires product understanding, consultative discovery and structured commercial execution.</p></div><div className="section-shell experience-grid">{industryExperience.map(([number, title, copy]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}</div><div className="section-shell experience-strips"><div className="experience-strip"><p>TECHNOLOGY &amp; SOLUTION EXPERIENCE</p><ul>{technologyExperience.map((item) => <li key={item}>{item}</li>)}</ul></div><div className="experience-strip"><p>COMMERCIAL EXPERIENCE ACROSS THE TECHNOLOGY LIFECYCLE</p><ul>{commercialExperience.map((item) => <li key={item}>{item}</li>)}</ul></div></div></section>
 
       <section className="section why-section" id="why"><div className="section-shell section-heading centered"><p className="eyebrow">OUR OPERATING MODEL</p><h2>Senior-Led. Evidence-Led. Execution-Focused.</h2></div><div className="section-shell why-grid">{[
         ['Senior-Led', 'Important client work receives direct senior commercial involvement.'],
