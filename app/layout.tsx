@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import { Manrope } from 'next/font/google';
+import { EB_Garamond } from 'next/font/google';
 import './globals.css';
 
-const manrope = Manrope({ variable: '--font-manrope', subsets: ['latin'] });
+const garamond = EB_Garamond({ variable: '--font-garamond', subsets: ['latin'] });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://salesnego.com'),
@@ -14,5 +14,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body className={manrope.variable}>{children}</body></html>;
+  return <html lang="en"><body className={garamond.variable}>{children}</body></html>;
 }
