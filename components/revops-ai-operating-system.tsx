@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState, type CSSProperties } from 'react';
+import { type CSSProperties } from 'react';
+import { useStageRotation } from './use-stage-rotation';
 
 const stages = [
   { number: '01', short: 'DATA', label: 'CONNECT THE DATA', phrase: 'Bring commercial signals into one operating layer.' },
@@ -42,37 +43,12 @@ function VisibilityControl() {
 const stageVisuals = [<ConnectData key="data" />, <OrchestrateWork key="orchestrate" />, <MoveWorkForward key="execute" />, <VisibilityControl key="visibility" />];
 
 export default function RevOpsAiOperatingSystem() {
-  const [activeStage, setActiveStage] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
-
-  useEffect(() => {
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const updateMotion = () => {
-      setReduceMotion(motionQuery.matches);
-      if (motionQuery.matches) setActiveStage(3);
-    };
-    const updateVisibility = () => setIsPaused(document.hidden);
-    updateMotion();
-    updateVisibility();
-    motionQuery.addEventListener('change', updateMotion);
-    document.addEventListener('visibilitychange', updateVisibility);
-    return () => {
-      motionQuery.removeEventListener('change', updateMotion);
-      document.removeEventListener('visibilitychange', updateVisibility);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (reduceMotion || isPaused) return;
-    const rotation = window.setTimeout(() => setActiveStage((stage) => (stage + 1) % stages.length), 3750);
-    return () => window.clearTimeout(rotation);
-  }, [activeStage, isPaused, reduceMotion]);
+  const { activeStage, hoverPaused, pauseOnPointer, resumeOnPointer, selectStage } = useStageRotation({ stageCount: stages.length, cycleDuration: 3200, reducedMotionStage: 3 });
 
   const stage = stages[activeStage];
 
   return <div className="section-shell revops-operating-system" aria-label="Revenue Operations and AI commercial operating system">
     <div className="ro-intro"><p className="eyebrow">REVENUE OPERATIONS &amp; AI-ACCELERATED SALES</p><h3>One connected operating layer for commercial execution.</h3><p>SalesNego connects data, intelligence, automation and pipeline discipline so commercial work moves forward with visibility and control.</p><div className="ro-system-line"><span>CRM</span><b>→</b><span>DATA</span><b>→</b><span>INTELLIGENCE</span><b>→</b><span>PIPELINE</span></div></div>
-    <div className="ro-board"><div className="ro-board-heading"><div><span>{stage.number} / {stage.label}</span><p>{stage.phrase}</p></div><b>COMMERCIAL OPERATING SYSTEM</b></div><div className="ro-canvas">{stageVisuals.map((visual, index) => <div className={`ro-stage${activeStage === index ? ' is-active' : ''}`} aria-hidden={activeStage !== index} key={stages[index].label}>{visual}</div>)}</div><div className="ro-stage-controls" aria-label="Choose Revenue Operations stage">{stages.map((item, index) => <button type="button" aria-label={`Show stage ${item.number}: ${item.label}`} aria-pressed={activeStage === index} onClick={() => setActiveStage(index)} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setActiveStage(index); } }} key={item.number}><span>{item.number}</span><b>{item.short}</b></button>)}</div><div className="ro-mobile-flow" aria-hidden="true"><span>DATA SOURCES</span><span>DATA LAYER</span><span>INTELLIGENCE + AUTOMATION</span><span>ENGAGEMENT + PIPELINE</span><span>VISIBILITY</span></div></div>
+    <div className={`ro-board${hoverPaused ? ' is-paused' : ''}`} onPointerEnter={pauseOnPointer} onPointerLeave={resumeOnPointer}><div className="ro-board-heading"><div><span>{stage.number} / {stage.label}</span><p>{stage.phrase}</p></div><b>COMMERCIAL OPERATING SYSTEM</b></div><div className="ro-canvas">{stageVisuals.map((visual, index) => <div className={`ro-stage${activeStage === index ? ' is-active' : ''}`} aria-hidden={activeStage !== index} key={stages[index].label}>{visual}</div>)}</div><div className="ro-stage-controls" aria-label="Choose Revenue Operations stage">{stages.map((item, index) => <button type="button" aria-label={`Show stage ${item.number}: ${item.label}`} aria-pressed={activeStage === index} onClick={() => selectStage(index)} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectStage(index); } }} key={item.number}><span>{item.number}</span><b>{item.short}</b></button>)}</div><div className="ro-mobile-flow" aria-hidden="true"><span>DATA SOURCES</span><span>DATA LAYER</span><span>INTELLIGENCE + AUTOMATION</span><span>ENGAGEMENT + PIPELINE</span><span>VISIBILITY</span></div></div>
   </div>;
 }

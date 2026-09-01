@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState, type CSSProperties } from 'react';
+import { type CSSProperties } from 'react';
+import { useStageRotation } from './use-stage-rotation';
 
 const stages = [
   { number: '01', label: 'MARKET UNIVERSE', phrase: 'Start broad. Understand the landscape.' },
@@ -44,34 +45,12 @@ function PriorityAccounts() {
 const stageVisuals = [<MarketUniverse key="universe" />, <FitSignals key="signals" />, <BuyerTriggers key="buyers" />, <PriorityAccounts key="priority" />];
 
 export default function MarketIntelligenceJourney() {
-  const [activeStage, setActiveStage] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
-
-  useEffect(() => {
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const updateMotion = () => setReduceMotion(motionQuery.matches);
-    const updateVisibility = () => setIsPaused(document.hidden);
-    updateMotion();
-    updateVisibility();
-    motionQuery.addEventListener('change', updateMotion);
-    document.addEventListener('visibilitychange', updateVisibility);
-    return () => {
-      motionQuery.removeEventListener('change', updateMotion);
-      document.removeEventListener('visibilitychange', updateVisibility);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (reduceMotion || isPaused) return;
-    const rotation = window.setTimeout(() => setActiveStage((stage) => (stage + 1) % stages.length), 4000);
-    return () => window.clearTimeout(rotation);
-  }, [activeStage, isPaused, reduceMotion]);
+  const { activeStage, hoverPaused, pauseOnPointer, resumeOnPointer, selectStage } = useStageRotation({ stageCount: stages.length, cycleDuration: 3400 });
 
   const stage = stages[activeStage];
 
   return <div className="section-shell market-intelligence-journey" aria-label="Market intelligence account prioritization journey">
     <div className="mi-intro"><p className="eyebrow">GTM STRATEGY &amp; MARKET INTELLIGENCE</p><h3>From a broad market to the accounts that deserve commercial attention.</h3><p>Evidence, fit and buyer context narrow the market before outreach begins.</p><div className="mi-method"><span>FACT</span><b>→</b><span>HYPOTHESIS</span><b>→</b><span>DISCOVERY QUESTION</span></div><small>Evidence earns priority. Discovery earns qualification.</small></div>
-    <div className="mi-visual"><div className="mi-visual-heading"><div><span>{stage.number} / {stage.label}</span><p>{stage.phrase}</p></div><b>INTELLIGENCE SYSTEM</b></div><div className="mi-canvas">{stageVisuals.map((visual, index) => <div className={`mi-stage${activeStage === index ? ' is-active' : ''}`} aria-hidden={activeStage !== index} key={stages[index].label}>{visual}</div>)}</div><div className="mi-stage-controls" aria-label="Choose market intelligence stage">{stages.map((item, index) => <button type="button" aria-label={`Show stage ${item.number}: ${item.label}`} aria-pressed={activeStage === index} onClick={() => setActiveStage(index)} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setActiveStage(index); } }} key={item.number}><span>{item.number}</span><i /></button>)}</div><div className="mi-mobile-flow" aria-hidden="true">{stages.map((item, index) => <span className={index === activeStage ? 'is-active' : ''} key={item.number}>{item.label}</span>)}</div></div>
+    <div className={`mi-visual${hoverPaused ? ' is-paused' : ''}`} onPointerEnter={pauseOnPointer} onPointerLeave={resumeOnPointer}><div className="mi-visual-heading"><div><span>{stage.number} / {stage.label}</span><p>{stage.phrase}</p></div><b>INTELLIGENCE SYSTEM</b></div><div className="mi-canvas">{stageVisuals.map((visual, index) => <div className={`mi-stage${activeStage === index ? ' is-active' : ''}`} aria-hidden={activeStage !== index} key={stages[index].label}>{visual}</div>)}</div><div className="mi-stage-controls" aria-label="Choose market intelligence stage">{stages.map((item, index) => <button type="button" aria-label={`Show stage ${item.number}: ${item.label}`} aria-pressed={activeStage === index} onClick={() => selectStage(index)} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectStage(index); } }} key={item.number}><span>{item.number}</span><i /></button>)}</div><div className="mi-mobile-flow" aria-hidden="true">{stages.map((item, index) => <span className={index === activeStage ? 'is-active' : ''} key={item.number}>{item.label}</span>)}</div></div>
   </div>;
 }

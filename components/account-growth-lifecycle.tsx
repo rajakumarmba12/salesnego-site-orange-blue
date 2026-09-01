@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState, type CSSProperties } from 'react';
+import { type CSSProperties } from 'react';
+import { useStageRotation } from './use-stage-rotation';
 
 const stages = [
   { number: '01', short: 'LAND', label: 'LAND', phrase: 'Win the right initial problem.' },
@@ -44,41 +45,15 @@ const stageVisuals = [<LandStage key="land" />, <AdoptStage key="adopt" />, <Exp
 const successBlocks = ['Onboarding', 'Value Realization', 'Customer Engagement', 'Account Intelligence', 'Risk Signals', 'Renewal & Expansion'];
 
 export default function AccountGrowthLifecycle() {
-  const [activeStage, setActiveStage] = useState(0);
-  const [hoverPaused, setHoverPaused] = useState(false);
-  const [hiddenPaused, setHiddenPaused] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
-
-  useEffect(() => {
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const updateMotion = () => {
-      setReduceMotion(motionQuery.matches);
-      if (motionQuery.matches) setActiveStage(3);
-    };
-    const updateVisibility = () => setHiddenPaused(document.hidden);
-    updateMotion();
-    updateVisibility();
-    motionQuery.addEventListener('change', updateMotion);
-    document.addEventListener('visibilitychange', updateVisibility);
-    return () => {
-      motionQuery.removeEventListener('change', updateMotion);
-      document.removeEventListener('visibilitychange', updateVisibility);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (reduceMotion || hoverPaused || hiddenPaused) return;
-    const rotation = window.setTimeout(() => setActiveStage((stage) => (stage + 1) % stages.length), 2800);
-    return () => window.clearTimeout(rotation);
-  }, [activeStage, hiddenPaused, hoverPaused, reduceMotion]);
+  const { activeStage, hoverPaused, pauseOnPointer, resumeOnPointer, selectStage } = useStageRotation({ stageCount: stages.length, cycleDuration: 2400, reducedMotionStage: 3 });
 
   const stage = stages[activeStage];
 
-  return <div className={`section-shell account-growth-lifecycle${hoverPaused ? ' is-paused' : ''}`} aria-label="SalesNego customer account growth lifecycle">
-    <div className="ag-interactive-area" onMouseEnter={() => setHoverPaused(true)} onMouseLeave={() => setHoverPaused(false)}>
+  return <div className="section-shell account-growth-lifecycle" aria-label="SalesNego customer account growth lifecycle">
+    <div className={`ag-interactive-area${hoverPaused ? ' is-paused' : ''}`} onPointerEnter={pauseOnPointer} onPointerLeave={resumeOnPointer}>
       <div className="ag-heading"><div><span>{stage.number} / {stage.label}</span><p>{stage.phrase}</p></div><b>ACCOUNT GROWTH ENGINE</b></div>
       <div className="ag-canvas">{stageVisuals.map((visual, index) => <div className={`ag-stage${activeStage === index ? ' is-active' : ''}`} aria-hidden={activeStage !== index} key={stages[index].label}>{visual}</div>)}</div>
-      <div className="ag-stage-controls" aria-label="Choose account growth stage">{stages.map((item, index) => <button type="button" aria-label={`Show stage ${item.number}: ${item.label}`} aria-pressed={activeStage === index} onClick={() => setActiveStage(index)} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setActiveStage(index); } }} key={item.number}><span>{item.number}</span><b>{item.short}</b></button>)}</div>
+      <div className="ag-stage-controls" aria-label="Choose account growth stage">{stages.map((item, index) => <button type="button" aria-label={`Show stage ${item.number}: ${item.label}`} aria-pressed={activeStage === index} onClick={() => selectStage(index)} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectStage(index); } }} key={item.number}><span>{item.number}</span><b>{item.short}</b></button>)}</div>
       <div className="ag-mobile-flow" aria-hidden="true">{stages.map((item, index) => <span className={activeStage === index ? 'is-active' : ''} key={item.number}>{item.label}</span>)}</div>
     </div>
     <div className="ag-success-foundation"><strong>CONTINUOUS CUSTOMER SUCCESS</strong><div>{successBlocks.map((item) => <span key={item}>{item}</span>)}</div></div>

@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState, type CSSProperties } from 'react';
+import { type CSSProperties } from 'react';
+import { useStageRotation } from './use-stage-rotation';
 
 const stages = [
   { number: '01', label: 'MARKET INTELLIGENCE', phrase: 'Find where the real opportunity is.', context: 'UNDERSTAND THE MARKET' },
@@ -45,29 +46,7 @@ function CustomerGrowth() {
 const visuals = [<MarketIntelligence key="market" />, <RevOpsSystem key="revops" />, <CommercialExecution key="execution" />, <CustomerGrowth key="growth" />];
 
 export default function HeroCommercialJourney() {
-  const [activeStage, setActiveStage] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
-
-  useEffect(() => {
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const updateMotion = () => setReduceMotion(motionQuery.matches);
-    const updateVisibility = () => setIsPaused(document.hidden);
-    updateMotion();
-    updateVisibility();
-    motionQuery.addEventListener('change', updateMotion);
-    document.addEventListener('visibilitychange', updateVisibility);
-    return () => {
-      motionQuery.removeEventListener('change', updateMotion);
-      document.removeEventListener('visibilitychange', updateVisibility);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (reduceMotion || isPaused) return;
-    const rotation = window.setTimeout(() => setActiveStage((stage) => (stage + 1) % stages.length), 5000);
-    return () => window.clearTimeout(rotation);
-  }, [activeStage, isPaused, reduceMotion]);
+  const { activeStage, hoverPaused, pauseOnPointer, resumeOnPointer, selectStage } = useStageRotation({ stageCount: stages.length, cycleDuration: 4200 });
 
   const stage = stages[activeStage];
 
@@ -82,10 +61,10 @@ export default function HeroCommercialJourney() {
         <p className="hero-context" aria-live="polite" key={stage.number}><span>{stage.number}</span>{stage.context}</p>
         <div className="button-row"><a className="button" href="https://calendly.com/meeting-with-salesnego/30min" target="_blank" rel="noopener noreferrer">Discuss Your Growth Priorities</a><a className="text-link light-link" href="#system">Explore How We Execute <span>→</span></a></div>
       </div>
-      <div className="commercial-journey" aria-label="SalesNego commercial journey">
+      <div className={`commercial-journey${hoverPaused ? ' is-paused' : ''}`} aria-label="SalesNego commercial journey" onPointerEnter={pauseOnPointer} onPointerLeave={resumeOnPointer}>
         <div className="journey-heading"><div><span>{stage.number} / {stage.label}</span><p>{stage.phrase}</p></div><b aria-hidden="true">SALESNEGO SYSTEM</b></div>
         <div className="journey-canvas">{visuals.map((visual, index) => <div className={`journey-stage${activeStage === index ? ' is-active' : ''}`} aria-hidden={activeStage !== index} key={stages[index].label}>{visual}</div>)}</div>
-        <div className="stage-navigation" aria-label="Choose commercial journey stage">{stages.map((item, index) => <button type="button" aria-label={`Show stage ${item.number}: ${item.label}`} aria-pressed={activeStage === index} onClick={() => setActiveStage(index)} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setActiveStage(index); } }} key={item.number}><span>{item.number}</span><i /></button>)}</div>
+        <div className="stage-navigation" aria-label="Choose commercial journey stage">{stages.map((item, index) => <button type="button" aria-label={`Show stage ${item.number}: ${item.label}`} aria-pressed={activeStage === index} onClick={() => selectStage(index)} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectStage(index); } }} key={item.number}><span>{item.number}</span><i /></button>)}</div>
       </div>
     </div>
     <div className="section-shell capability-strip" aria-label="SalesNego capabilities"><span>GTM Strategy &amp; Market Intelligence</span><span>Revenue Operations &amp; AI-Accelerated Sales</span><span>End-to-End Commercial Execution</span></div>
