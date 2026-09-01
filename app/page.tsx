@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import HeroCommercialJourney from '@/components/hero-commercial-journey';
-const marketImage =
-  'https://ik.imagekit.io/4rtwqlnkg/Maketering%20INtelligence%20and%20GTM.png?updatedAt=1788228132160';
+import MarketIntelligenceJourney from '@/components/market-intelligence-journey';
 const revOpsImage =
   'https://ik.imagekit.io/4rtwqlnkg/Revenue%20Operations%20+%20AI.png?updatedAt=1788228131653';
 const accountGrowthImage =
@@ -123,7 +122,7 @@ export default function Home() {
       <section className="section services-section">
         <div className="section-shell section-heading"><p className="eyebrow">WHAT WE DO</p><h2>Three Capabilities. One Commercial Engine.</h2></div>
         <div className="section-shell services-grid">{services.map((service) => <details className="service-card" key={service.number}><summary><span>{service.number}</span><h3>{service.title}</h3><p>{service.subtitle}</p><b>Explore Capability <i>+</i></b></summary><div className="service-detail"><p>{service.body}</p><ul>{service.items.map((item) => <li key={item}>{item}</li>)}</ul></div></details>)}</div>
-        <div className="section-shell image-panel compact-image-panel"><img src={marketImage} width="1484" height="1060" alt="B2B SaaS market intelligence and target account prioritization framework" loading="lazy" decoding="async" /></div>
+        <MarketIntelligenceJourney />
       </section>
 
       <section className="section dark-section" id="ai-revops">
