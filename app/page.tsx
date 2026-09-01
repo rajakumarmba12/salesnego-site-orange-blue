@@ -4,8 +4,7 @@ import { useState } from 'react';
 import HeroCommercialJourney from '@/components/hero-commercial-journey';
 import MarketIntelligenceJourney from '@/components/market-intelligence-journey';
 import RevOpsAiOperatingSystem from '@/components/revops-ai-operating-system';
-const accountGrowthImage =
-  'https://ik.imagekit.io/4rtwqlnkg/Account%20Growth%20Engine.png?updatedAt=1788228132521';
+import AccountGrowthLifecycle from '@/components/account-growth-lifecycle';
 
 const services = [
   {
@@ -149,7 +148,7 @@ export default function Home() {
 
       <section className="section growth-section" id="account-growth">
         <div className="section-shell growth-copy"><p className="eyebrow">AFTER THE FIRST WIN</p><h2>Customer acquisition is only the beginning.</h2><p>The first contract creates a customer relationship, implementation insight and new commercial intelligence. SalesNego looks for expansion only when a legitimate adjacent problem becomes visible.</p></div>
-        <figure className="section-shell growth-visual-scroll" aria-label="Scrollable Account Growth framework on narrow screens"><div className="growth-visual-inner"><img src={accountGrowthImage} width="1638" height="960" alt="SalesNego Account Growth Engine showing Land, Adopt, Expand, Retain & Grow supported by continuous Customer Success." loading="lazy" decoding="async" /></div></figure>
+        <AccountGrowthLifecycle />
       </section>
 
       <section className="section pale-section engagement-section"><div className="section-shell two-column-intro"><div><p className="eyebrow">WORKING WITH SALESNEGO</p><h2>Commercial alignment without unnecessary complexity.</h2></div><div><p>Engagements are structured around the actual work required. Depending on the scope, commercial models can combine a monthly execution retainer with an agreed performance component.</p><p className="callout">SalesNego does not operate as a pay-per-meeting appointment-setting service.</p></div></div></section>
