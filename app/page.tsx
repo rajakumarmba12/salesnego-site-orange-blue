@@ -1,9 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-
-const heroImage =
-  'https://ik.imagekit.io/4rtwqlnkg/Market-to-Growth%20Sales%20Intelligence%20Flow.png?updatedAt=1788228132060';
+import HeroCommercialJourney from '@/components/hero-commercial-journey';
 const marketImage =
   'https://ik.imagekit.io/4rtwqlnkg/Maketering%20INtelligence%20and%20GTM.png?updatedAt=1788228132160';
 const revOpsImage =
@@ -106,20 +104,7 @@ export default function Home() {
         <a className="button button-small header-cta" href="https://calendly.com/meeting-with-salesnego/30min" target="_blank" rel="noopener noreferrer">Discuss Your Growth Priorities</a>
       </header>
 
-      <section className="hero" id="home">
-        <div className="signal-grid" aria-hidden="true" />
-        <div className="section-shell hero-grid">
-          <div className="hero-copy">
-            <p className="eyebrow light">B2B COMMERCIAL EXECUTION</p>
-            <h1>From Market Signal to <em>Closed Revenue.</em></h1>
-            <p className="hero-lede">SalesNego helps B2B SaaS, AI and technology companies turn market intelligence into qualified pipeline, customer acquisition and account growth.</p>
-            <p className="hero-note">Strategy, Revenue Operations and senior-led sales execution — connected in one commercial system.</p>
-            <div className="button-row"><a className="button" href="https://calendly.com/meeting-with-salesnego/30min" target="_blank" rel="noopener noreferrer">Discuss Your Growth Priorities</a><a className="text-link light-link" href="#system">Explore How We Execute <span>→</span></a></div>
-          </div>
-          <figure className="hero-visual"><img src={heroImage} width="1536" height="1024" alt="B2B commercial execution system connecting market intelligence, Revenue Operations and sales execution" fetchPriority="high" /></figure>
-        </div>
-        <div className="section-shell capability-strip" aria-label="SalesNego capabilities"><span>GTM Strategy &amp; Market Intelligence</span><span>Revenue Operations &amp; AI-Accelerated Sales</span><span>End-to-End Commercial Execution</span></div>
-      </section>
+      <HeroCommercialJourney />
 
       <section className="proof-strip" aria-label="Trusted clients"><div className="section-shell proof-inner"><div><p className="eyebrow">TRUSTED CLIENTS</p><p>Commercial experience across SaaS, enterprise technology, digital products and technology services.</p></div><div className="client-logos"><div className="client-logo-track">{[false, true].map((duplicate) => <div className="client-logo-set" aria-hidden={duplicate || undefined} key={String(duplicate)}>{clientLogos.map(([src, width, height, alt]) => <figure key={`${duplicate}-${src}`}><img src={src} width={width} height={height} alt={duplicate ? '' : alt} loading="lazy" decoding="async" /></figure>)}</div>)}</div></div></div></section>
 
