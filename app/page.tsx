@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import HeroCommercialJourney from '@/components/hero-commercial-journey';
 import MarketIntelligenceJourney from '@/components/market-intelligence-journey';
-const revOpsImage =
-  'https://ik.imagekit.io/4rtwqlnkg/Revenue%20Operations%20+%20AI.png?updatedAt=1788228131653';
+import RevOpsAiOperatingSystem from '@/components/revops-ai-operating-system';
 const accountGrowthImage =
   'https://ik.imagekit.io/4rtwqlnkg/Account%20Growth%20Engine.png?updatedAt=1788228132521';
 
@@ -128,7 +127,7 @@ export default function Home() {
       <section className="section dark-section" id="ai-revops">
         <div className="section-shell section-heading"><p className="eyebrow light">SERVICE DETAIL</p><h2>See how each discipline moves commercial work forward.</h2></div>
         <div className="section-shell tabs" role="region" aria-label="Service details"><div className="tab-list" role="tablist" aria-label="Services">{serviceTabs.map((tab, index) => <button key={tab.label} role="tab" aria-selected={activeService === index} onClick={() => setActiveService(index)}>{tab.label}</button>)}</div><div className="tab-panel" role="tabpanel"><p className="tab-label">QUESTION WE ANSWER</p><h3>{serviceTabs[activeService].question}</h3><div className="flow-line">{serviceTabs[activeService].flow}</div><p><strong>Outcome:</strong> {serviceTabs[activeService].outcome}</p></div></div>
-        <div className="section-shell image-panel image-panel-dark compact-image-panel"><img src={revOpsImage} width="1484" height="1060" alt="AI-assisted Revenue Operations workflow for B2B SaaS sales" loading="lazy" decoding="async" /></div>
+        <RevOpsAiOperatingSystem />
       </section>
 
       <section className="section system-section" id="system"><div className="section-shell section-heading centered"><p className="eyebrow">HOW WE WORK</p><h2>The SalesNego Commercial Execution System</h2></div><div className="section-shell system-flow">{systemSteps.map(([number, title, copy]) => <article key={number}><span>{number}</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div><div className="section-shell system-foundation"><span>DATA</span><span>REVOPS</span><span>AI</span><span>COMMERCIAL INTELLIGENCE</span></div><p className="section-shell system-note">The tools support the commercial process. They do not replace judgment, discovery or customer relationships.</p></section>
