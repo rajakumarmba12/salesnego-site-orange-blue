@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'SalesNego | B2B SaaS GTM, RevOps & Sales Execution',
   description: 'SalesNego helps B2B SaaS, AI and technology companies build GTM strategy, Revenue Operations and full-cycle commercial execution from market entry through closing and account growth.',
   alternates: { canonical: '/' },
-  openGraph: { title: 'SalesNego | B2B SaaS GTM, RevOps & Sales Execution', description: 'Senior-led commercial execution from market intelligence through account growth.', url: 'https://salesnego.com/', siteName: 'SalesNego', type: 'website' },
+  openGraph: { title: 'SalesNego | B2B SaaS GTM, RevOps & Sales Execution', description: 'Founder-led commercial execution from market intelligence through account growth.', url: 'https://salesnego.com/', siteName: 'SalesNego', type: 'website' },
   twitter: { card: 'summary_large_image' },
 };
 

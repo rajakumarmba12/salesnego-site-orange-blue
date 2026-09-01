@@ -74,7 +74,7 @@ const clientLogos = [
 const faqs = [
   ['Do you only provide lead generation?', 'No. Prospecting and demand generation can form part of an engagement, but SalesNego is designed around a broader commercial lifecycle that includes GTM strategy, Revenue Operations, discovery, qualification, sales execution, closing and account growth.'],
   ['What types of companies do you work with?', 'Our primary focus is B2B SaaS, AI and technology product companies. We selectively work with differentiated technology services companies where the commercial problem requires consultative selling.'],
-  ['Can SalesNego work with an existing sales team?', 'Yes. SalesNego can complement founders, sales leaders, account executives, marketing teams and customer success teams by adding commercial structure, execution capacity and senior support.'],
+  ['Can SalesNego work with an existing sales team?', 'Yes. SalesNego can complement founders, sales leaders, account executives, marketing teams and customer success teams by adding commercial structure, execution capacity and founder-level support.'],
   ['How is AI used in your sales process?', 'AI is used to accelerate research, enrichment, account intelligence, personalization preparation, workflow automation, CRM administration, meeting intelligence and pipeline analysis. Strategic account decisions, discovery, negotiation and customer relationships remain human-led.'],
   ['Which sales methodologies do you use?', 'We do not force every opportunity through one methodology. Depending on sales complexity, SalesNego can use principles from SPICED, MEDDPICC, Challenger, SPIN and other qualification approaches.'],
 ];
@@ -137,8 +137,8 @@ export default function Home() {
 
       <section className="section dark-section" id="experience"><div className="section-shell section-heading experience-heading"><p className="eyebrow light">INDUSTRY &amp; TECHNOLOGY EXPERIENCE</p><h2>Commercial Experience Across B2B Technology Markets</h2><p>SalesNego brings commercial experience across SaaS, enterprise technology and specialist industry solutions where selling requires product understanding, consultative discovery and structured commercial execution.</p></div><div className="section-shell experience-grid">{industryExperience.map(([number, title, copy]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}</div><div className="section-shell experience-strips"><div className="experience-strip"><p>TECHNOLOGY &amp; SOLUTION EXPERIENCE</p><ul>{technologyExperience.map((item) => <li key={item}>{item}</li>)}</ul></div><div className="experience-strip"><p>COMMERCIAL EXPERIENCE ACROSS THE TECHNOLOGY LIFECYCLE</p><ul>{commercialExperience.map((item) => <li key={item}>{item}</li>)}</ul></div></div></section>
 
-      <section className="section why-section" id="why"><div className="section-shell section-heading centered"><p className="eyebrow">OUR OPERATING MODEL</p><h2>Senior-Led. Evidence-Led. Execution-Focused.</h2></div><div className="section-shell why-grid">{[
-        ['Senior-Led', 'Important client work receives direct senior commercial involvement.'],
+      <section className="section why-section" id="why"><div className="section-shell section-heading centered"><p className="eyebrow">OUR OPERATING MODEL</p><h2>Founder-Led. Evidence-Led. Execution-Focused.</h2></div><div className="section-shell why-grid">{[
+        ['Founder-Led', 'Important client work receives direct founder-level commercial involvement.'],
         ['Limited Client Portfolio', 'SalesNego deliberately limits simultaneous engagements so commercial context is not lost.'],
         ['Product-First', 'We understand the product, customer problem and buyer before building the commercial motion.'],
         ['Evidence-Led', 'We prioritize verifiable account signals and discovery over generic assumptions.'],

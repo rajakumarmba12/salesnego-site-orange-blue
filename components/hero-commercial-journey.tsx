@@ -78,7 +78,7 @@ export default function HeroCommercialJourney() {
         <p className="eyebrow light">B2B COMMERCIAL EXECUTION</p>
         <h1>From Market Signal to <em>Closed Revenue.</em></h1>
         <p className="hero-lede">SalesNego helps B2B SaaS, AI and technology companies turn market intelligence into qualified pipeline, customer acquisition and account growth.</p>
-        <p className="hero-note">Strategy, Revenue Operations and senior-led sales execution — connected in one commercial system.</p>
+        <p className="hero-note">Strategy, Revenue Operations and founder-led sales execution — connected in one commercial system.</p>
         <p className="hero-context" aria-live="polite" key={stage.number}><span>{stage.number}</span>{stage.context}</p>
         <div className="button-row"><a className="button" href="https://calendly.com/meeting-with-salesnego/30min" target="_blank" rel="noopener noreferrer">Discuss Your Growth Priorities</a><a className="text-link light-link" href="#system">Explore How We Execute <span>→</span></a></div>
       </div>
