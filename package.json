@@ -1,14 +1,14 @@
 {
-  "name": "sites-project",
+  "name": "salesnego",
   "version": "0.1.0",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "vinext dev",
+    "dev": "vinext dev -p 3000 -H 0.0.0.0",
     "build": "vinext build",
-    "start": "wrangler dev --config dist/server/wrangler.json",
+    "start": "node server.ts",
     "lint": "oxlint",
     "format": "oxfmt"
   },
